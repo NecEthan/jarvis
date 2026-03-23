@@ -2,14 +2,16 @@
 # Composes a morning/evening briefing from calendar, news, weather, etc.
 
 # TODO: import data source integrations (calendar, weather, news)
-# TODO: import state schema
 
-def briefing_agent_node(state):
+def briefing_agent_node(state: dict) -> dict:
     """
-    Gathers context from external sources and produces a briefing summary.
+    LangGraph node: composes a briefing summary.
+    Reads 'intent' and 'messages' from state, writes 'result' and appends to 'messages'.
     """
-    # TODO: fetch calendar events
-    # TODO: fetch weather forecast
-    # TODO: fetch news headlines
-    # TODO: compose and return briefing text in state
-    raise NotImplementedError
+    intent = state.get("intent", "unknown")
+    # TODO: fetch calendar events, weather, news then compose summary
+    result = f"[briefing stub] received intent: '{intent}'"
+    return {
+        "result": result,
+        "messages": state["messages"] + [{"role": "ai", "content": result}],
+    }
