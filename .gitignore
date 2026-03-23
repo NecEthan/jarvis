@@ -1,8 +1,4 @@
-# Python virtual environments
-.venv/
-venv/
-
-# Environment files (keep examples)
+# Environment files (keep examples only)
 .env
 .env.*
 !.env.example
@@ -10,9 +6,11 @@ venv/
 **/.env.*
 !**/.env.example
 
-# Python cache
+# Python artifacts
 __pycache__/
 *.py[cod]
+.venv/
+venv/
 
-# Node dependencies
+# Node artifacts
 node_modules/
