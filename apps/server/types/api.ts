@@ -1,5 +1,3 @@
-// ─── Agent ────────────────────────────────────────────────────────────────────
-
 export interface AgentRequest {
   message: string;
   conversationId?: string;
@@ -8,10 +6,7 @@ export interface AgentRequest {
 export interface AgentResponse {
   reply: string;
   conversationId: string;
-  // TODO: add tool calls, sources, etc.
 }
-
-// ─── TTS ──────────────────────────────────────────────────────────────────────
 
 export interface TtsRequest {
   text: string;
@@ -22,8 +17,6 @@ export interface TtsResponse {
   audioUrl: string;
 }
 
-// ─── Sonos ────────────────────────────────────────────────────────────────────
-
 export interface SonosPlayRequest {
   audioUrl: string;
 }
@@ -32,14 +25,24 @@ export type SonosCommand = "pause" | "resume" | "next" | "prev";
 
 export interface SonosControlRequest {
   command: SonosCommand;
-  value?: number; // for volume
+  value?: number; 
 }
 
 export interface SonosResponse {
   ok: boolean;
 }
 
-// ─── Generic ──────────────────────────────────────────────────────────────────
+export interface SpotifyPlayRequest {
+  spotifyUri: string;
+  deviceId?: string;
+  deviceName?: string;
+}
+
+export interface SpotifyPlayResponse {
+  ok: boolean;
+  deviceId?: string;
+}
+
 
 export interface ApiError {
   error: string;
