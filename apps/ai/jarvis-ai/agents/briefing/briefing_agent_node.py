@@ -10,5 +10,5 @@ def briefing_agent_node(state) -> dict:
     result = f"[briefing stub] received intent: '{state.intent}'"
     # TODO: fetch calendar events, weather, news then compose summary
     return {
-        "messages": state.messages + [{"role": "ai", "content": result}],
+        "content": result,
     }

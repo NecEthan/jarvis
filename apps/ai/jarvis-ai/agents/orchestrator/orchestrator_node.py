@@ -2,8 +2,6 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from agents.orchestrator.orchestrator_schemas import OrchestratorState, OrchestratorOutput
 
-# ─── Prompt ───────────────────────────────────────────────────────────────────
-
 ORCHESTRATOR_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """You are the Orchestrator for Jarvis, a personal AI assistant.
 
@@ -27,13 +25,11 @@ orchestrator_chain = ORCHESTRATOR_PROMPT | llm.with_structured_output(
 
 def orchestrator_node(state: OrchestratorState) -> dict:
     output: OrchestratorOutput = orchestrator_chain.invoke({
-        "text": state.messages[-1]["content"],
+        "text": state.content,
     })
 
     return {
-        "messages": state.messages + [
-            {"role": "ai", "content": f"route={output.route} | intent={output.intent}"}
-        ],
+        "content": f"route={output.route} | intent={output.intent}",
         "route":  output.route,
         "intent": output.intent,
     }

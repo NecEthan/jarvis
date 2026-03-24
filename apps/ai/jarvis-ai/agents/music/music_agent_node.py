@@ -10,5 +10,5 @@ def music_agent_node(state) -> dict:
     result = f"[music stub] received intent: '{state.intent}'"
     # TODO: call Sonos / streaming service API based on state.intent
     return {
-        "messages": state.messages + [{"role": "ai", "content": result}],
+        "content": result,
     }

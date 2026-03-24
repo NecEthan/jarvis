@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 
 class OrchestratorState(BaseModel):
-    messages: list = []
+    content:  str
     route:    Optional[str] = None
     intent:   Optional[str] = None
 
