@@ -3,14 +3,14 @@
 
 # TODO: import Sonos client or music service integration
 
-def music_agent_node(state: dict) -> dict:
+def music_agent_node(state) -> dict:
     """
     LangGraph node: handles music commands.
-    Reads 'intent' and 'messages' from state, writes 'result' and appends to 'messages'.
     """
-    intent = state.get("intent", "unknown")
+    intent = state.additional_context.get("intent", "unknown")
+    # TODO: call Sonos / streaming service API based on intent
     result = f"[music stub] received intent: '{intent}'"
     return {
-        "result": result,
-        "messages": state["messages"] + [{"role": "ai", "content": result}],
+        "messages": state.messages + [{"role": "ai", "content": result}],
+        "additional_context": {**state.additional_context, "result": result},
     }

@@ -25,4 +25,11 @@ workflow.add_conditional_edges("Orchestrator", route)
 workflow.add_edge("MusicAgent", END)
 workflow.add_edge("BriefingAgent", END)
 
-app = workflow.compile()  
+app = workflow.compile()
+
+if __name__ == "__main__":
+    import json
+    result = app.invoke(OrchestratorState(
+        messages=[{"role": "user", "content": "play some lofi music"}]
+    ))
+    print(json.dumps(result, indent=2, default=str))
