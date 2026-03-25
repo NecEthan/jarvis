@@ -32,17 +32,6 @@ export interface SonosResponse {
   ok: boolean;
 }
 
-export interface SpotifyPlayRequest {
-  spotifyUri: string;
-  deviceId?: string;
-  deviceName?: string;
-}
-
-export interface SpotifyPlayResponse {
-  ok: boolean;
-  deviceId?: string;
-}
-
 
 export interface ApiError {
   error: string;
