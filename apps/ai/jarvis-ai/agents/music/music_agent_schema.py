@@ -12,6 +12,5 @@ class MusicOutput(BaseModel):
 	action: Literal["play", "pause", "next", "previous", "unknown"] = Field(
 		default="play"
 	)
-	song_query: str = Field(default="rock song")
-	message: str = Field(default="Playing music now.")
-
+	song_query: str = Field(default="")
+	message: str = Field(default="")
