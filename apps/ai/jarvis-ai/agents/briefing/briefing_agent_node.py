@@ -1,6 +1,9 @@
 import os
+import subprocess
+import tempfile
 
 import httpx
+from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv(
@@ -35,6 +38,22 @@ def get_weather(location: str = "auto") -> dict:
         return {"error": str(e)}
 
 
+def speak(text: str) -> None:
+    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as f:
+        audio_path = f.name
+
+    with client.audio.speech.with_streaming_response.create(
+        model="tts-1",
+        voice="alloy",
+        input=text,
+    ) as response:
+        response.stream_to_file(audio_path)
+
+    subprocess.run(["afplay", audio_path], check=True)
+    os.unlink(audio_path)
+
+
 def briefing_agent_node(state) -> dict:
     parts = []
 
@@ -48,4 +67,6 @@ def briefing_agent_node(state) -> dict:
     else:
         parts.append(f"Weather unavailable: {weather['error']}")
 
-    return {"content": "\n\n".join(parts)}
+    content = "\n\n".join(parts)
+    speak(content)
+    return {"content": content}
