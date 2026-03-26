@@ -30,6 +30,6 @@ app = workflow.compile()
 
 if __name__ == "__main__":
     result = app.invoke(OrchestratorState(
-        content="play some rock music"
+        content="give me a morning brief"
     ))
     print(json.dumps(result, indent=2, default=str))
